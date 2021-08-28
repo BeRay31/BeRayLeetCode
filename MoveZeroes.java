@@ -1,6 +1,6 @@
-import java.time.temporal.Temporal;
-
-public class MoveZeros {
+// https://leetcode.com/problems/move-zeroes/
+// Solution => Using array Reverse (slow), using snowball algorithm(fast & extensible)
+public class MoveZeroes {
   // this will work even when the number is not only zero but whitelisted in some array
   public void TwoPointerSolution(int[] nums) {
     int zeroPointer = nums.length - 1;

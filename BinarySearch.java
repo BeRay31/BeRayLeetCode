@@ -1,3 +1,5 @@
+// https://leetcode.com/problems/binary-search/
+// 2 Solution used => Recursive and sequential
 public class BinarySearch {
   public int recursiveHelper(int[] nums, int left, int right, int target) {
     int center = (left + right)/2;
@@ -13,15 +15,13 @@ public class BinarySearch {
     }
     // recursive
     else if (nums[center] > target) {
-      this.recursiveHelper(nums, left, center, target);
+      return this.recursiveHelper(nums, left, center, target);
     } else if (nums[center] < target) {
-      this.recursiveHelper(nums, center, right, target);
-    } else {
-      return center;
-    }
+      return this.recursiveHelper(nums, center, right, target);
+    } else return center;
   }
 
-  public int recursiveSolution(int[] nums, int target) {
+  public int recursiveSolution(int[] nums, int target) { // kinda dumb but just in case needed to be recursive this is the solution
     return this.recursiveHelper(nums, 0, nums.length - 1, target);
   }
 

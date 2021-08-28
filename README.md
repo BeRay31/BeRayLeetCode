@@ -1,2 +1,2 @@
 # BeRayLeetCode
-Have Fun with LeetCode XD
+Have Fun in LeetCode XD

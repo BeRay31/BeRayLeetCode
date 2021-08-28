@@ -1,7 +1,8 @@
+// https://leetcode.com/problems/rotate-array/
+// IDEA, [1,2,3,4,5,6,7], k = 3 -> reverse (0, 3), reverse (4, 6) -> [4,3,2,1,7,6,5] -> reverse(0, 6) -> [5,6,7,1,2,3,4]
+// [1,2,3,4], k = 2. factor must be handled first, check if it is exceed the array len or not, simplest way to handle this is by modulo operation
+
 public class ScrollArray {
-  // https://leetcode.com/problems/rotate-array/
-  // IDEA, [1,2,3,4,5,6,7], k = 3 -> reverse (0, 3), reverse (4, 6) -> [4,3,2,1,7,6,5] -> reverse(0, 6) -> [5,6,7,1,2,3,4]
-  // [1,2,3,4], k = 2. factor must be handled first, check if it is exceed the array len or not, simplest way to handle this is by modulo operation
   public void reverse(int[] nums, int start, int end) {
     while(start < end) {
       int temp = nums[start];

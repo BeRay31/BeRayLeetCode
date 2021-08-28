@@ -1,3 +1,4 @@
+// https://leetcode.com/problems/search-insert-position/
 public class InsertNumber {
   // O (log n)
   public int binaryInsert(int[] nums, int target) {
@@ -24,7 +25,7 @@ public class InsertNumber {
   public int sequentialInsert(int[] nums, int target) {
     if (nums.length == 0) return 0;
     for (int i = 0; i < nums.length; i++) {
-      if (nums[i] > target) {
+      if (nums[i] >= target) {
         return i;
       }
     }
