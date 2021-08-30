@@ -2,14 +2,14 @@ package beray.leetcode.AlgorithmStudies.Day1;
 // https://leetcode.com/problems/first-bad-version/
 // Solution Used => Binary Search
 public class FirstBadVersion {
-  static int badVal;
+  public int badVal;
 
   public FirstBadVersion(int badVal) {
-    FirstBadVersion.badVal = badVal;
+    this.badVal = badVal;
   }
 
   public boolean isBadVersion(int val) {
-    return val >= FirstBadVersion.badVal;
+    return val >= badVal;
   }
 
   public int firstBad(int n) {
