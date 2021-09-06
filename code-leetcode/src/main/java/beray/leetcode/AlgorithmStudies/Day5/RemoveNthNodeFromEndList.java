@@ -21,9 +21,9 @@ public class RemoveNthNodeFromEndList {
         firstPointer = firstPointer.next;
       }
     }
-    if (head != null) counter++;
+    counter++;
     if (firstPointer.next == null) return firstPointer.next;
-    else if(n == 2 && firstPointer == head) return lastPointer;
+    else if(n == counter) return lastPointer;
     else firstPointer.next = firstPointer.next.next;
 
     return head;
