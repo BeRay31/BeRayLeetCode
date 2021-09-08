@@ -1,5 +1,5 @@
 package beray.leetcode.AlgorithmStudies.Day6;
-
+// https://leetcode.com/problems/longest-substring-without-repeating-characters/
 public class LengthOfLongestSubstring {
   public int slidingWindows (String s) {
     if (s.length() < 2) return s.length();
@@ -12,10 +12,8 @@ public class LengthOfLongestSubstring {
       int charAt = Integer.valueOf(s.charAt(i));
       System.out.print(s.charAt(i) + " ");
       if (i == 0 || utfMap[charAt] < substringStart || (utfMap[charAt] == 0 && s.charAt(utfMap[charAt]) != s.charAt(i))) {
-        System.out.println("HERE A");
         utfMap[charAt] = i;
       } else {
-        System.out.println("HERE B");
         substringStart = utfMap[charAt] + 1;
         utfMap[charAt] = i;
         maxSubstringLength = Math.max(tempMax, maxSubstringLength);
