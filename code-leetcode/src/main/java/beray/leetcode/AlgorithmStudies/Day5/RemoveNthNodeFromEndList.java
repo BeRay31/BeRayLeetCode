@@ -12,20 +12,17 @@ public class RemoveNthNodeFromEndList {
 
   public ListNode removeNthFromEnd(ListNode head, int n) {
     ListNode firstPointer = head;
-    ListNode lastPointer = head;
-    int counter = 0;
-    while (lastPointer.next != null) {
-      lastPointer = lastPointer.next;
-      counter++;
-      if (counter > n) {
+    ListNode secondPointer = head;
+    int i = 0;
+    while (firstPointer.next != null) {
+        i++;
         firstPointer = firstPointer.next;
-      }
+        if (i > n) secondPointer = secondPointer.next;
     }
-    counter++;
-    if (firstPointer.next == null) return firstPointer.next;
-    else if(n == counter) return lastPointer;
-    else firstPointer.next = firstPointer.next.next;
-
+    i++;
+    if (secondPointer.next == null) return null;
+    else if (i == n) return secondPointer.next;
+    else secondPointer.next = secondPointer.next.next;
     return head;
   }
 }
