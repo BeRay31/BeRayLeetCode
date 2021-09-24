@@ -10,7 +10,6 @@ public class LengthOfLongestSubstring {
     int tempMax = 0;
     while (i < s.length()) {
       int charAt = Integer.valueOf(s.charAt(i));
-      System.out.print(s.charAt(i) + " ");
       if (i == 0 || utfMap[charAt] < substringStart || (utfMap[charAt] == 0 && s.charAt(utfMap[charAt]) != s.charAt(i))) {
         utfMap[charAt] = i;
       } else {
@@ -19,7 +18,6 @@ public class LengthOfLongestSubstring {
         maxSubstringLength = Math.max(tempMax, maxSubstringLength);
         tempMax = i - substringStart;
       }
-      System.out.println(tempMax);
       tempMax += 1;
       i++;
     }

@@ -23,8 +23,9 @@ public class ReverseLinkedList {
 
   public ListNode reverseListIterative(ListNode head) {
     if (head == null || head.next == null) return head;
-    ListNode p1 = new ListNode(head.val);
+    ListNode p1 = head;
     ListNode p2 = head.next;
+    p1.next = null;
     while(p2.next != null) {
       ListNode temp = p2.next;
       p2.next = p1;

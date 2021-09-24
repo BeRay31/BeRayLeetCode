@@ -15,9 +15,9 @@ public class RemoveNthNodeFromEndList {
     ListNode secondPointer = head;
     int i = 0;
     while (firstPointer.next != null) {
-        i++;
-        firstPointer = firstPointer.next;
-        if (i > n) secondPointer = secondPointer.next;
+      i++;
+      firstPointer = firstPointer.next;
+      if (i > n) secondPointer = secondPointer.next;
     }
     i++;
     if (secondPointer.next == null) return null;
