@@ -4,26 +4,26 @@ import java.util.Arrays;
 
 public class PermutationInString {
   public boolean checkInclusion(String s1, String s2) {
-    int lenS1 = s1.length();
-    int lenS2 = s2.length();
-    int[] permutateMap = new int[26];
-    int[] checkMap = new int[26];
-    int i = 0;
+    int n = s1.length();
+    int m = s2.length();
+    if (n > m) return false;
+    char[] c1 = s1.toCharArray();
+    char[] c2 = s2.toCharArray();
+    int[] comp1 = new int[26];
+    int[] comp2 = new int[26];
 
-    if (lenS1 > lenS2) return false;
-    for (;i < lenS1; i++) {
-      permutateMap[(int)s1.charAt(i) - 'a']++;
-      checkMap[(int)s2.charAt(i) - 'a']++;
+    for (int i = 0; i < n; i++) {
+      comp1[c1[i] - 97]++;
+      comp2[c2[i] - 97]++;
     }
-    if (Arrays.equals(permutateMap, checkMap)) return true;
+    if (Arrays.equals(comp1, comp2)) return true;
 
-    for (;i< lenS2; i++) {
-      if (Arrays.equals(permutateMap, checkMap)) return true;
-      checkMap[(int)s2.charAt(i) - 'a']++;
-      checkMap[(int)s2.charAt(i-lenS1) - 'a']--;
+    for (int i = n; i < m; i++) {
+      comp2[c2[i] - 97]++;
+      comp2[c2[i - n] - 97]--;
+      if (Arrays.equals(comp1, comp2)) return true;
     }
-    if (Arrays.equals(permutateMap, checkMap)) return true;
-    return false;
+    return Arrays.equals(comp1, comp2);
   }
 
   public static void main(String[] args) {

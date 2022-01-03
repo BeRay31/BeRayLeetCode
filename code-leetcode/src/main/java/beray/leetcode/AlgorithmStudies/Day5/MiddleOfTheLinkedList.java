@@ -11,20 +11,15 @@ public class MiddleOfTheLinkedList {
   }
 
   public ListNode middleNode (ListNode head) {
-    int counter = 0;
-    ListNode node = head;
-    while (node != null) {
-      node = node.next;
-      counter++;
+    int count = 0;
+    ListNode fp = head;
+    while (fp != null) {
+      count++;
+      fp = fp.next;
     }
-
-    int middle = counter/2;
-    int idx = 0;
-    node = head;
-    while (idx != middle) {
-      node = node.next;
-      idx++;
-    }
-    return node;
+    if (count <= 1) return head;
+    int mid = count/2;
+    for (int i = 0; i < mid; i++) head = head.next;
+    return head;
   }
 }

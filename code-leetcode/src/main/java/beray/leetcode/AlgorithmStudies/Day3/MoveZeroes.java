@@ -75,13 +75,17 @@ public class MoveZeroes {
   }
 
   public void improvedSnowball(int[] nums) {
-    if (nums.length < 2) return;
-    int curr = 0;
-    for (int i = 0; i < nums.length; i++) {
+    int n = nums.length;
+    if (n < 2) return;
+    int sp = 0;
+    for (int i = 0; i < n; i++) {
       if (nums[i] != 0) {
-        int temp = nums[curr];
-        nums[curr++] = nums[i];
-        nums[i] = temp;
+        if (i != sp) {
+          int temp = nums[sp];
+          nums[sp] = nums[i];
+          nums[i] = temp;
+        }
+        sp++;
       }
     }
   }

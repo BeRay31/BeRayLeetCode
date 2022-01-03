@@ -11,18 +11,18 @@ public class RemoveNthNodeFromEndList {
   }
 
   public ListNode removeNthFromEnd(ListNode head, int n) {
-    ListNode firstPointer = head;
-    ListNode secondPointer = head;
-    int i = 0;
-    while (firstPointer.next != null) {
-      i++;
-      firstPointer = firstPointer.next;
-      if (i > n) secondPointer = secondPointer.next;
+    ListNode fp = head;
+    ListNode sp = fp;
+    int count = 0;
+    while (fp.next != null) {
+      fp = fp.next;
+      count++;
+      if (count > n) sp = sp.next;
     }
-    i++;
-    if (secondPointer.next == null) return null;
-    else if (i == n) return secondPointer.next;
-    else secondPointer.next = secondPointer.next.next;
+    count++;
+
+    if (count == n) return head.next;
+    else sp.next = sp.next.next;
     return head;
   }
 }

@@ -30,23 +30,30 @@ public class ReverseWordInString {
     }
   }
 
-  public String ImprovedReserveStrings(String s) {
-    char[] charArray = s.toCharArray();
-    int firstIndex = 0;
-    int lastIndex = 0;
+  public void reverse(char[] charArr, int start, int end) {
+    while (start < end) {
+      char temp = charArr[start];
+      charArr[start] = charArr[end];
+      charArr[end] = temp;
+      start++;
+      end--;
+    }
+  }
 
-    for (int i = 0; i < charArray.length; i++) {
-      if (charArray[i] == ' ') {
-        lastIndex = i - 1;
-        this.ImprovedReverseWord(charArray, firstIndex, lastIndex);
-        firstIndex = i + 1;
-      } else if (i == charArray.length - 1) {
-        lastIndex = i;
-        this.ImprovedReverseWord(charArray, firstIndex, lastIndex);
+  public String ImprovedReserveStrings(String s) {
+    char[] charArr = s.toCharArray();
+    int n = charArr.length;
+    int start = 0;
+    for (int i = 0; i < n; i++) {
+      if (charArr[i] == ' ') {
+        reverse(charArr, start, i - 1);
+        start = i + 1;
       }
     }
-
-    return new String(charArray);
+    if (start < n) {
+      reverse(charArr, start, n-1);
+    }
+    return new String(charArr);
   }
 
   public static void main(String[] args) {

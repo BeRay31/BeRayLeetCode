@@ -3,8 +3,9 @@ package beray.leetcode.AlgorithmStudies.Day4;
 
 public class ReverseString {
   public void twoPointer(char[] s) {
+    int n = s.length;
     int left = 0;
-    int right = s.length - 1;
+    int right = n;
 
     while (left < right) {
       char temp = s[left];

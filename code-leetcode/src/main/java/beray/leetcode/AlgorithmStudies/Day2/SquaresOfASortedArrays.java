@@ -11,21 +11,23 @@ public class SquaresOfASortedArrays {
   }
 
   public int[] twoPointer(int[] nums) {
-    int[] newSortedNums = new int[nums.length];
-    int left = 0;
-    int right = nums.length - 1;
-    int currentIdx = nums.length - 1;
-    
-    while(left <= right && currentIdx >= 0) {
-      if (this.abs(nums[left]) > this.abs(nums[right])) {
-        newSortedNums[currentIdx] = this.square(nums[left]);
-        left++;
+    int n = nums.length;
+    int[] newNums = new int[n];
+    int idx = n - 1;
+    int start = 0;
+    int end = idx;
+    while (idx >= 0) {
+      int left = nums[start]*nums[start];
+      int right = nums[end]*nums[end];
+      if (left > right) {
+        newNums[idx] = left;
+        start++;
       } else {
-        newSortedNums[currentIdx] = this.square(nums[right]);
-        right--;
+        newNums[idx] = right;
+        end--;
       }
-      currentIdx--;
+      idx--;
     }
-    return newSortedNums;
+    return newNums;
   }
 }

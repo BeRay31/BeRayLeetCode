@@ -6,7 +6,7 @@ package beray.leetcode.AlgorithmStudies.Day2;
 
 public class ScrollArray {
   public static void reverse(int[] nums, int start, int end) {
-    while(start < end) {
+    while (start < end) {
       int temp = nums[start];
       nums[start] = nums[end];
       nums[end] = temp;
@@ -16,12 +16,13 @@ public class ScrollArray {
   }
 
   public static void rotate(int[] nums, int factor) {
-    if (nums.length < 2) return;
-    int start = 0;
-    int end = nums.length - 1;
-    reverse(nums, start, end - factor);
-    reverse(nums, end - factor + 1, end);
-    reverse(nums, start, end);
+    int n = nums.length;
+    if (n < 2) return;
+    int k = factor % n;
+    if (k == 0) return;
+    reverse(nums, 0, n - k - 1);
+    reverse(nums, n - k, n - 1);
+    reverse(nums, 0, n - 1); 
   }
 
   public static void main(String[] args) {
