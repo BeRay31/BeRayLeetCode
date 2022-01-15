@@ -22,17 +22,19 @@ public class ReverseLinkedList {
   }
 
   public ListNode reverseListIterative(ListNode head) {
-    if (head == null || head.next == null) return head;
-    ListNode p1 = head;
-    ListNode p2 = head.next;
-    p1.next = null;
-    while(p2.next != null) {
-      ListNode temp = p2.next;
-      p2.next = p1;
-      p1 = p2;
-      p2 = temp;
+    if (head == null) return head;
+    ListNode newHead = null;
+    ListNode fp = newHead;
+    ListNode sp = head;
+
+    while (sp.next != null) {
+      ListNode temp = sp.next;
+      sp.next = fp;
+      fp = sp;
+      sp = temp;
     }
-    p2.next = p1;
-    return p2;
+    sp.next = fp;
+
+    return sp;
   }
 }

@@ -1,35 +1,32 @@
 package beray.leetcode.AlgorithmStudies.Day12;
 
-import java.util.Arrays;
 import java.util.List;
 // https://leetcode.com/problems/triangle/
 public class TriangleMinimumPath {
-  public int minimumHelper(List<List<Integer>> triangle, int index, int nestIndex, int[][] memo) {
-    if (index < triangle.size()) {
-      if (memo[index][nestIndex] != -1) return memo[index][nestIndex];
-      else {
-        int rootVal = triangle.get(index).get(nestIndex);
-        if (index + 1 < triangle.size()) {
-          int left = minimumHelper(triangle, index + 1, nestIndex, memo);
-          if (memo[index + 1][nestIndex] != -1) memo[index + 1][nestIndex] = Math.min(left, memo[index + 1][nestIndex]);
-          int right = minimumHelper(triangle, index + 1, nestIndex + 1, memo);
-          if (memo[index + 1][nestIndex + 1] != -1) memo[index + 1][nestIndex + 1] = Math.min(right, memo[index + 1][nestIndex + 1]);
-          memo[index][nestIndex] = rootVal + Math.min(memo[index + 1][nestIndex], memo[index + 1][nestIndex + 1]);
-        } else {
-          memo[index][nestIndex] = rootVal;
-        }
-        return memo[index][nestIndex];
-      } 
-    } return 0;
-  }
+  public int minimumTotal(List<List<Integer>> triangle) { // Bottom Up Approach
+    int m = triangle.size();
+    int n = triangle.get(m - 1).size();
+    if (m == 0) return 0;
+    else if (m == 1) return triangle.get(0).get(0);
 
-  public int minimumTotal(List<List<Integer>> triangle) {
-    if (triangle.size() > 1) {
-      int[][] memo = new int[triangle.size()][triangle.get(triangle.size() - 1).size()];
-      for (int[] arr: memo) {
-        Arrays.fill(arr, -1);
+    int[][] memo = new int[2][n];
+    memo[0][0] = triangle.get(0).get(0);
+    int min = Integer.MAX_VALUE;
+
+    for (int i = 1; i < m; i++) {
+      memo[1][0] = Integer.MAX_VALUE;
+      List<Integer> currTri = triangle.get(i);
+      for (int j = 0; j < i; j++) {
+        memo[1][j] = Math.min(memo[1][j], memo[0][j] + currTri.get(j));
+        memo[1][j+1] = memo[0][j] + currTri.get(j + 1);
+        if (i == m - 1) min = Math.min(memo[1][j], memo[1][j+1]);
       }
-      return minimumHelper(triangle, 0, 0, memo);
-    } return triangle.get(0).get(0);
+      memo[0] = memo[1];
+      memo[1] = new int[n];
+      for(int j = 0; j < memo[0].length; j++) System.out.print(memo[0][j]);
+      System.out.println();
+    }
+
+    return min;
   }
 }

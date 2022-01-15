@@ -1,30 +1,33 @@
 package beray.leetcode.AlgorithmStudies.Day12;
 // https://leetcode.com/problems/house-robber/
 public class HouseRobber {
-  public int robHelper(int[] nums, int index, boolean isPrevTaken, int rob, int[] memo) {
-    if (index < nums.length) {
-      if (isPrevTaken) {
-        return robHelper(nums, index + 1, false, rob, memo);
-      } else {
-        if (memo[index] != -1) {
-          return rob + memo[index];
-        } else {
-          int res = Math.max(robHelper(nums, index + 1, true, nums[index], memo), robHelper(nums, index + 1, false, 0, memo));
-          memo[index] = res;
-          return rob + memo[index];
-        }
-      }
-    } else {
-      return rob;
+  public int rob(int[] nums) { // Bottom up approach
+    int[][] memo = new int[nums.length][2];
+    memo[0][1] = nums[0]; 
+    for(int i = 1; i < nums.length; i++) {
+      memo[i][0] = Math.max(memo[i-1][0], memo[i-1][1]);
+      memo[i][1] = memo[i - 1][0] + nums[i];
     }
+    return Math.max(memo[nums.length - 1][0], memo[nums.length-1][1]);
   }
-  
-  public int rob(int[] nums) {
-    if (nums.length < 1) return 0;
-    int[] memo = new int[nums.length];
-    for(int i = 0; i < memo.length; i++) {
-      memo[i] = -1;
+
+  public int helper(int[][] memo, int[] nums, int index, int isTaken) {
+    if (memo[index][isTaken] != -1) return memo[index][isTaken];
+    else {
+      if (isTaken == 1) memo[index][isTaken] = helper(memo, nums, index - 1, 0) + nums[index];
+      else memo[index][isTaken] = Math.max(helper(memo, nums, index - 1, 0), helper(memo, nums, index - 1, 1));
     }
-    return robHelper(nums, 0, false, 0, memo);
+    return memo[index][isTaken];
+  }
+
+  public int robTopDown(int[] nums) {
+    int[][] memo = new int[nums.length][2];
+    for(int i = 0; i < nums.length; i++) {
+      memo[i][1] = -1;
+      memo[i][0] = -1;
+    }
+    memo[0][1] = nums[0];
+    memo[0][0] = 0;
+    return Math.max(helper(memo, nums, nums.length - 1, 1), helper(memo, nums, nums.length - 1, 0));
   }
 }

@@ -24,13 +24,14 @@ public class PopulateNextRightPointer {
   // The input is perfect binary tree so i assume there is no null pointer except right on the right side of the tree
 
   public void connectHelper(Node left, Node right) {
-    if (left == null) return; 
+    if (left == null) return;
     left.next = right;
     connectHelper(left.left, left.right);
-    if (right == null) return;
-    connectHelper(left.right, right.left);
-    connectHelper(right.left, right.right);
-    connectHelper(right.right, null);
+    if (right != null) {
+      connectHelper(left.right, right.left);
+      connectHelper(right.left, right.right);
+      connectHelper(right.right, null);
+    } else connectHelper(left.right, null);
   }
 
   public Node connect(Node root) {

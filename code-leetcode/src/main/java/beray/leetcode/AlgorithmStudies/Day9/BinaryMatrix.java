@@ -5,37 +5,35 @@ import java.util.Queue;
 
 // https://leetcode.com/problems/01-matrix/
 public class BinaryMatrix {
+  int[] dir = new int[]{0, 1, 0, -1, 0};
   public int[][] updateMatrixBFS(int[][] matrix) {
-    // Init queue
-    Queue<int[]> queue = new LinkedList<>();
+    Queue<int[]> q = new LinkedList<>();
     int m = matrix.length;
     int n = matrix[0].length;
-    // Visited Arr
-    boolean[][] visited = new boolean[m][n];
 
+    boolean[][] visited = new boolean[m][n];
     for (int i = 0; i < m; i++) {
       for (int j = 0; j < n; j++) {
         if (matrix[i][j] == 0) {
-          // set 0 as it distance by tag it as an evaluated item and append it to queue cuz 0 is the base
-          queue.offer(new int[]{i, j});
+          q.add(new int[]{i, j});
           visited[i][j] = true;
         }
       }
     }
-    // dir array
-    int[][] dir = new int[][]{{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-    // The idea is create an array of distance from an array that has value 0, since it is BFS then it will construct the array of minimum distance
-    while (!queue.isEmpty()) {
-      int[] cur = queue.poll();
-      for (int i = 0; i < 4; i++) {
-        int row = cur[0] + dir[i][0];
-        int col = cur[1] + dir[i][1];
-        if (row < 0 || row >= m || col < 0 || col >= n || visited[row][col]) continue;
-        visited[row][col] = true;
-        matrix[row][col] = matrix[cur[0]][cur[1]] + 1;
-        queue.offer(new int[]{row, col});
+
+    while (!q.isEmpty()) {
+      int[] loc = q.poll();
+
+      for (int i = 0; i < dir.length - 1; i++) {
+        int newLocX = loc[0] + dir[i];
+        int newLocY = loc[1] + dir[i+1];
+        if (newLocX < 0 || newLocY < 0 || newLocX >= m || newLocY >= n || visited[newLocX][newLocY]) continue;
+        visited[newLocX][newLocY] = true;
+        matrix[newLocX][newLocY] = matrix[loc[0]][loc[1]] + 1;
+        q.add(new int[]{newLocX, newLocY});
       }
     }
+
     return matrix;
   }
 

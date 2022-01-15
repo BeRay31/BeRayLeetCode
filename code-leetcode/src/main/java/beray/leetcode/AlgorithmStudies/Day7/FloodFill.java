@@ -1,27 +1,18 @@
 package beray.leetcode.AlgorithmStudies.Day7;
 // https://leetcode.com/problems/flood-fill/
 public class FloodFill {
-  public void recursiveHelper(int[][] image, int currColor, int newColor, int sr, int sc) {
-    int lenMat = image.length;
-    int lenCol = image[0].length;
-    if (image[sr][sc] == currColor) {
-      image[sr][sc] = newColor;
-      if (sr > 0) { // move up
-        recursiveHelper(image, currColor, newColor, --sr, sc);
-      } else if (sc < lenCol) {
-        recursiveHelper(image, currColor, newColor, sr, ++sc);
-      } else if (sr < lenMat) {
-        recursiveHelper(image, currColor, newColor, ++sr, sc);
-      } else if (sc > 0) {
-        recursiveHelper(image, currColor, newColor, sr, --sc);
-      }
-    }
+  public static int[] dir = new int[]{0, 1, 0, -1, 0};
+  public void recursiveHelper(int[][] image, int newCol, int sr, int sc, int targetCol) {
+    int n = image.length;
+    int m = image[0].length;
+    if (sr < 0 || sc < 0 || sr > n || sc > m || image[sr][sc] != targetCol) return;
+    image[sr][sc] = newCol;
+    for(int i = 0; i < dir.length - 1; i++) recursiveHelper(image, newCol, sr + dir[i] , sc + dir[i+1], targetCol);
   }
 
-  public int[][] recursiveFloodFill(int[][] image, int sr, int sc, int newColor) {
-    int currentColor = image[sr][sc];
-    if (currentColor == newColor) return image;
-    recursiveHelper(image, currentColor, newColor, sr, sc);
+  public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+    if (image[sr][sc] == newColor) return image;
+    recursiveHelper(image, newColor, sr, sc, image[sr][sc]);
     return image;
   }
 }
