@@ -3,11 +3,11 @@ package beray.leetcode.AlgorithmStudies.Day13;
 public class NumberOf1Bits {
   // Basic bit shifting
   public int hammingWeight(int n) {
-    int sumOne = 0;
+    int sum = 0;
     while (n != 0) {
-      sumOne = sumOne + (n & 1);
+      if ((n & 1) == 1) sum++;
       n = n >>> 1;
     }
-    return sumOne;
+    return sum;
   }
 }
